@@ -12,7 +12,7 @@ from core.emulator.distributed import DistributedServer
 from core.emulator.enumerations import NodeTypes, TransportType
 from core.errors import CoreCommandError, CoreError
 from core.executables import MOUNT, TEST, UMOUNT
-from core.nodes.base import CoreNetworkBase, CoreNodeBase
+from core.nodes.base import CoreNetworkBase, CoreNode
 from core.nodes.interface import DEFAULT_MTU, CoreInterface
 
 logger = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from core.emulator.session import Session
 
 
-class PhysicalNode(CoreNodeBase):
+class PhysicalNode(CoreNode):
     def __init__(
         self,
         session: "Session",
@@ -204,7 +204,7 @@ class PhysicalNode(CoreNodeBase):
         raise CoreError("physical node does not support addfile")
 
 
-class Rj45Node(CoreNodeBase):
+class Rj45Node(CoreNode):
     """
     RJ45Node is a physical interface on the host linked to the emulated
     network.
